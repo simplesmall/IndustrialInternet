@@ -1,0 +1,38 @@
+basePath: /
+host: localhost:8090
+info:
+  contact:
+    email: example@some.com
+    name: www.topgoer.com
+    url: https://www.topgoer.com
+  description: This is a  server of IndustrialInternet.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.topgoer.com
+  title: IndustrialInternet项目API
+  version: "1.0"
+paths:
+  /api/v1/login:
+    get:
+      description: 登录测试接口描述信息
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 登录测试接口
+      tags:
+      - 登录
+  /api/v1/notfound:
+    get:
+      description: notfound测试接口描述信息
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: notfound测试接口
+      tags:
+      - NotFound
+swagger: "2.0"
