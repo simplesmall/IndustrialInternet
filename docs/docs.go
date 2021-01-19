@@ -33,7 +33,7 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/login": {
+        "/api/v1/auth/login": {
             "get": {
                 "description": "登录测试接口描述信息",
                 "tags": [

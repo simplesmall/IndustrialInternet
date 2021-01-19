@@ -23,6 +23,9 @@ func InitServer() {
 	// 路由分组
 	api := server.Group("api")
 	{
+		api.GET("/login", apiv1.LoginTest)
+		api.GET("/normal", apiv1.NormalTest)
+		api.GET("/msgOK", apiv1.NormalOKTest)
 		v1 := api.Group("v1")
 		{
 			v1.Group("auth")

@@ -11,19 +11,11 @@ import (
 // @Summary 登录测试接口
 // @Description  登录测试接口描述信息
 // @Success 200 {string} string    "ok"
-// @Router /api/v1/login [get]
+// @Router /api/v1/auth/login [get]
 // @Tags 登录
 // BaseURL /
 func Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		//res:=response.ResponseStructure{
-		//	Code: 0,
-		//	Msg:  "Hello login!!",
-		//	Data: nil,
-		//}
-		//c.JSON(http.StatusOK,gin.H{
-		//	"data":res,
-		//})
 		var loginInput middlewareJWT.LoginInput
 		err := c.ShouldBindJSON(&loginInput)
 		if err != nil {
@@ -52,6 +44,14 @@ func Login() gin.HandlerFunc {
 	}
 }
 
+func LoginTest(c *gin.Context) {
+	c.JSON(http.StatusOK, &response.ResponseStructure{
+		230,
+		"Hello login!!",
+		nil,
+	})
+}
+
 // @Summary notfound测试接口
 // @Description  notfound测试接口描述信息
 // @Success 200 {string} string    "ok"
@@ -60,8 +60,28 @@ func Login() gin.HandlerFunc {
 // BaseURL /
 func NotFoundPage() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.JSON(http.StatusNotFound,gin.H{
-			"data":response.ResponseStructure.NotFound(response.ResponseStructure{}),
+		c.JSON(http.StatusNotFound, gin.H{
+			"data": response.ResponseStructure.NotFound(response.ResponseStructure{}),
 		})
 	}
+} // @Summary notfound测试接口
+// @Description  notfound测试接口描述信息
+// @Success 200 {string} string    "ok"
+// @Router /api/v1/notfound [get]
+// @Tags NotFound
+// BaseURL /
+func NormalTest(c *gin.Context) {
+	data:="hello"
+	//structure := response.ResponseStructure{}
+	c.JSON(http.StatusNotFound, gin.H{
+		"data": response.ResponseStructure{}.OKResult(data),
+	})
+}
+func NormalOKTest(c *gin.Context) {
+	data:="JIUSHI OKKKK"
+	msg:="简单的消息"
+	//structure := response.ResponseStructure{}
+	c.JSON(http.StatusNotFound, gin.H{
+		"data": response.ResponseStructure{}.OKResultWithMsg(msg,data),
+	})
 }

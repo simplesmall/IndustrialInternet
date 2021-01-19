@@ -13,7 +13,7 @@ info:
   title: IndustrialInternet项目API
   version: "1.0"
 paths:
-  /api/v1/login:
+  /api/v1/auth/login:
     get:
       description: 登录测试接口描述信息
       responses:
