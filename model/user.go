@@ -53,6 +53,7 @@ func (t *XTime) Scan(v interface{}) error {
 	}
 	return fmt.Errorf("can not convert %v to timestamp", v)
 }
+
 type BaseModel struct {
 	ID        uint `gorm:"primary_key,AUTO_INCREMENT"`
 	CreatedAt XTime
@@ -77,6 +78,17 @@ type User struct {
 	Role     []Role `gorm:"many2many:user_roles"`
 }
 
+
+//角色
+type Role struct {
+	BaseModel
+	Name       string       `gorm:"size:100;column(name)" json:"name" form:"name"`
+	UserId     int          `gorm:"" json:"user_id"`
+	Desc       string       `gorm:"size:500;column(desc)" json:"desc" form:"desc"`
+	User       User         `gorm:"foreignKey:UserId"`
+	Permission []Permission `gorm:"many2many:role_permissions"`
+}
+
 //权限
 type Permission struct {
 	BaseModel
@@ -88,14 +100,4 @@ type Permission struct {
 	Url      string `gorm:"size:500;column(url)" json:"url" form:"url"`
 	Icon     string `gorm:"size:500;column(icon)" json:"icon" form:"icon"`
 	Describe string `gorm:"size:200;column(describe)" json:"describe" form:"describe"`
-}
-
-//角色
-type Role struct {
-	BaseModel
-	Name       string       `gorm:"size:100;column(name)" json:"name" form:"name"`
-	UserId     int          `gorm:"" json:"user_id"`
-	Desc       string       `gorm:"size:500;column(desc)" json:"desc" form:"desc"`
-	User       User         `gorm:"foreignKey:UserId"`
-	Permission []Permission `gorm:"many2many:role_permissions"`
 }

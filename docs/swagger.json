@@ -18,18 +18,90 @@
     "host": "localhost:8090",
     "basePath": "/",
     "paths": {
+        "/api/login": {
+            "get": {
+                "description": "普通GET测试接口描述信息",
+                "tags": [
+                    "Test"
+                ],
+                "summary": "普通GET测试",
+                "responses": {
+                    "200": {
+                        "description": "code\":200,\"data\":null,\"msg\":\"\"}",
+                        "schema": {
+                            "$ref": "#/definitions/Response.ResponseStructure"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/msgOK": {
+            "get": {
+                "description": "NormalOKTest测试接口描述信息",
+                "tags": [
+                    "Test"
+                ],
+                "summary": "NormalOKTest测试接口",
+                "responses": {
+                    "200": {
+                        "description": "code\":200,\"data\":null,\"msg\":\"\"}",
+                        "schema": {
+                            "$ref": "#/definitions/Response.ResponseStructure"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/normal": {
+            "get": {
+                "description": "NormalTest测试接口描述信息",
+                "tags": [
+                    "Test"
+                ],
+                "summary": "NormalTest测试接口",
+                "responses": {
+                    "200": {
+                        "description": "code\":200,\"data\":null,\"msg\":\"\"}",
+                        "schema": {
+                            "$ref": "#/definitions/Response.ResponseStructure"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/auth/login": {
             "get": {
                 "description": "登录测试接口描述信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "tags": [
                     "登录"
                 ],
                 "summary": "登录测试接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用户令牌",
+                        "name": "token",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "username",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "ok",
+                        "description": "code\":200,\"msg\":\"\",\"data\":null}",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/Response.ResponseStructure"
                         }
                     }
                 }
@@ -49,6 +121,22 @@
                             "type": "string"
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Response.ResponseStructure": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "object"
+                },
+                "msg": {
+                    "type": "string"
                 }
             }
         }

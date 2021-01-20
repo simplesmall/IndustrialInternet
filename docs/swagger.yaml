@@ -1,4 +1,14 @@
 basePath: /
+definitions:
+  Response.ResponseStructure:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      msg:
+        type: string
+    type: object
 host: localhost:8090
 info:
   contact:
@@ -13,14 +23,61 @@ info:
   title: IndustrialInternet项目API
   version: "1.0"
 paths:
-  /api/v1/auth/login:
+  /api/login:
     get:
-      description: 登录测试接口描述信息
+      description: 普通GET测试接口描述信息
       responses:
         "200":
-          description: ok
+          description: code":200,"data":null,"msg":""}
           schema:
-            type: string
+            $ref: '#/definitions/Response.ResponseStructure'
+      summary: 普通GET测试
+      tags:
+      - Test
+  /api/msgOK:
+    get:
+      description: NormalOKTest测试接口描述信息
+      responses:
+        "200":
+          description: code":200,"data":null,"msg":""}
+          schema:
+            $ref: '#/definitions/Response.ResponseStructure'
+      summary: NormalOKTest测试接口
+      tags:
+      - Test
+  /api/normal:
+    get:
+      description: NormalTest测试接口描述信息
+      responses:
+        "200":
+          description: code":200,"data":null,"msg":""}
+          schema:
+            $ref: '#/definitions/Response.ResponseStructure'
+      summary: NormalTest测试接口
+      tags:
+      - Test
+  /api/v1/auth/login:
+    get:
+      consumes:
+      - application/json
+      description: 登录测试接口描述信息
+      parameters:
+      - description: 用户令牌
+        in: header
+        name: token
+        type: string
+      - description: 角色ID
+        in: path
+        name: username
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code":200,"msg":"","data":null}
+          schema:
+            $ref: '#/definitions/Response.ResponseStructure'
       summary: 登录测试接口
       tags:
       - 登录

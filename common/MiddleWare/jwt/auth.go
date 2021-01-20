@@ -4,14 +4,15 @@ import (
 	"IndustrialInternet/config"
 	Model "IndustrialInternet/model"
 	"errors"
+	"fmt"
 	jwtgo "github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
 	"time"
 )
 
 type LoginInput struct {
-	Username string `form:"username" validate:"required"`
-	Password string `form:"password" validate:"required"`
+	Username string `json:"username" form:"username" validate:"required"`
+	Password string `json:"password" form:"password" validate:"required"`
 }
 
 type JwtToken struct {
@@ -24,8 +25,10 @@ func Login(username string, password string) (token JwtToken, err error) {
 	var user Model.User
 	var nullData JwtToken
 
+	//修改的用户登录返回
 	obj := config.DB.Where("username = ?", username).First(&user)
 	if err = obj.Error; err != nil {
+		fmt.Println(obj,err)
 		return
 	}
 

@@ -1,6 +1,7 @@
 package MiddleJWT
 
 import (
+	"IndustrialInternet/model/Response"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -12,7 +13,7 @@ func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("token")
 		if token == "" {
-			//Middlewares.ResponseError(c, Middlewares.RequestFail, errors.New("请求未携带token，无权限访问"))
+			c.JSON(500,Response.ResponseStructure{}.FailResWithMsg("请求未携带token，无权限访问",errors.New("请求未携带token，无权限访问")))
 			c.Abort()
 			return
 		}
@@ -24,11 +25,11 @@ func JWTAuth() gin.HandlerFunc {
 		//fmt.Println("claims", claims)
 		if err != nil {
 			if err == TokenExpired {
-				//Middlewares.ResponseError(c, Middlewares.TokenExpiredCode, errors.New("授权已过期"))
+				c.JSON(500,Response.ResponseStructure{}.FailResWithMsg("授权已过期",errors.New("授权已过期")))
 				c.Abort()
 				return
 			}
-			//Middlewares.ResponseError(c, Middlewares.RequestFail, err)
+			c.JSON(500,Response.ResponseStructure{}.FailResWithMsg("token出错",err))
 			c.Abort()
 			return
 		}
