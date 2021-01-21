@@ -85,7 +85,7 @@ var doc = `{
             }
         },
         "/api/v1/auth/login": {
-            "get": {
+            "post": {
                 "description": "登录测试接口描述信息",
                 "consumes": [
                     "application/json"
@@ -100,14 +100,15 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "用户令牌",
-                        "name": "token",
-                        "in": "header"
+                        "description": "用户名",
+                        "name": "username",
+                        "in": "path",
+                        "required": true
                     },
                     {
-                        "type": "integer",
-                        "description": "角色ID",
-                        "name": "username",
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
                         "in": "path",
                         "required": true
                     }

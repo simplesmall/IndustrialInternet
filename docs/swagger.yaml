@@ -57,20 +57,21 @@ paths:
       tags:
       - Test
   /api/v1/auth/login:
-    get:
+    post:
       consumes:
       - application/json
       description: 登录测试接口描述信息
       parameters:
-      - description: 用户令牌
-        in: header
-        name: token
-        type: string
-      - description: 角色ID
+      - description: 用户名
         in: path
         name: username
         required: true
-        type: integer
+        type: string
+      - description: 密码
+        in: path
+        name: password
+        required: true
+        type: string
       produces:
       - application/json
       responses:

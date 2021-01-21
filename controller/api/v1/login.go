@@ -12,9 +12,9 @@ import (
 // @Accept application/json
 // @Produce application/json
 // @Success 200 {object} Response.ResponseStructure   {"code":200,"msg":"","data":null}
-// @Router /api/v1/auth/login [get]
-// @Param token header string false "用户令牌"
-// @Param username path integer true "角色ID"
+// @Router /api/v1/auth/login [post]
+// @Param username path string true "用户名"
+// @Param password path string true "密码"
 // @Tags 登录
 // BaseURL /
 func Login(c *gin.Context) {

@@ -32,7 +32,7 @@ func InitServer() {
 			// 测试登录登出
 			auth:=v1.Group("auth")
 			{
-				auth.GET("/login", apiv1.Login)
+				auth.POST("/login", apiv1.Login)
 				auth.GET("/logout", apiv1.Login)
 				auth.GET("/notfound", apiv1.NotFoundPage())
 			}
